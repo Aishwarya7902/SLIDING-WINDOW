@@ -27,4 +27,36 @@ int calcSum(int arr[], int n, int k)
         cout << sum << " ";
     }
 }
+
+/*optimisation*/
+
+#include <bits/stdc++.h>
+using namespace std;
+void SubarrayOfSizeK(vector<int>&arr,int k){
+    int n=arr.size();
+    int i=0,j=0;
+    int sum=0;
+   
+    while(i<j){
+        sum+=arr[j];
+        if(j-i+1<k)j++;
+        if(j-i+1==k){
+            //ans<--cal
+            cout<<sum<<" ";
+            //unaffect ith effect
+            sum-=arr[i];
+            //slide the window
+            i++;
+            j++;
+        }
+        
+    }
+    
+}
+
+int main() {
+    vector<int> arr={ 1, 2, 3, 4, 5, 6 };
+	SubarrayOfSizeK(arr,3);
+	return 0;
+}
   
