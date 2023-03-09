@@ -20,3 +20,42 @@ It takes only O(n) time to process a N-size sliding window minimum/maximum probl
 Note: different from a priority queue (which takes O(nlogk) to solve this problem), it doesn't pop the max element: It pops the first element (in original order) 
 in queue.
 */
+
+/*
+tc:
+sc:
+*/
+
+
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        int i=0,j=0;
+        vector<int> ans;
+        deque<int>dq;
+        while(j<nums.size()){
+            //if upcoming element is less than back then only push in dq...else pop all smaller elements
+            while(!dq.empty() && nums[j]>nums[dq.back()]){
+                dq.pop_back();
+            }
+        
+            dq.push_back(j);
+            //while window size is less than...k ...j++;
+            if(j-i+1<k)j++;
+            else if(j-i+1==k){
+                //when condition hits... ans <- cal
+                //front element is max in dq of given window ..push in ans
+                ans.push_back(nums[dq.front()]);
+                //uneffect ith effect
+                if(nums[i]==nums[dq.front()]){
+                    dq.pop_front();
+                }
+                //slide window
+                i++;
+                j++;
+            }
+
+        }
+        return ans;
+    }
+};
