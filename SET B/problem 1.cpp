@@ -22,11 +22,12 @@ in queue.
 */
 
 /*
-tc:
+tc:o(n)
 sc:
 */
 
 
+//fixed size sliding window
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
@@ -34,13 +35,16 @@ public:
         vector<int> ans;
         deque<int>dq;
         while(j<nums.size()){
-            //if upcoming element is less than back then only push in dq...else pop all smaller elements
+            //  ---------> we are storing in a deacreasing fashion
+            //if upcoming element is less than back then only push in dq...else pop all smaller elements because we are storing in a deacreasing fashion
+            //do some calculations 
             while(!dq.empty() && nums[j]>nums[dq.back()]){
                 dq.pop_back();
             }
         
             dq.push_back(j);
             //while window size is less than...k ...j++;
+            //condition not hit
             if(j-i+1<k)j++;
             else if(j-i+1==k){
                 //when condition hits... ans <- cal
